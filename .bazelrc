@@ -1,0 +1,9 @@
+startup --windows_enable_symlinks
+common --enable_runfiles
+common --incompatible_strict_action_env
+common --test_output=errors
+
+# Disable bzlmod lock file since it's not stable enough yet
+common --lockfile_mode=off
+
+common --experimental_output_directory_naming_scheme=diff_against_dynamic_baseline

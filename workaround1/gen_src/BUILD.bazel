@@ -1,0 +1,13 @@
+exports_files(["src.zip"])
+
+filegroup(
+    name = "cs_source",
+    srcs = glob(["*.cs"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "cpp_source",
+    srcs = glob(["*.cpp"]),
+    visibility = ["//visibility:public"],
+)

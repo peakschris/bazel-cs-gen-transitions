@@ -1,0 +1,25 @@
+#################################################################
+# Aspect lib has improved binary generation rules & utils.
+# v2 not supported yet by rules_dotnet
+#################################################################
+bazel_dep(name = "aspect_bazel_lib", version = "2.4.1")
+
+#################################################################
+# Rules dotnet
+#################################################################
+bazel_dep(name = "rules_dotnet", version = "0.14.0")
+
+dotnet = use_extension("@rules_dotnet//dotnet:extensions.bzl", "dotnet")
+dotnet.toolchain(dotnet_version = "6.0.413")
+use_repo(dotnet, "dotnet_toolchains")
+
+register_toolchains("@dotnet_toolchains//:all")
+
+deps_extension = use_extension("//repo:paket.deps_extension.bzl", "deps_extension")
+use_repo(deps_extension, "paket.deps")
+
+#################################################################
+# With_cfg; control rule configurations
+# https://github.com/fmeum/with_cfg.bzl
+#################################################################
+bazel_dep(name = "with_cfg.bzl", version = "0.2.3")

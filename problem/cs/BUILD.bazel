@@ -1,0 +1,20 @@
+load("@rules_dotnet//dotnet:defs.bzl", "csharp_binary")
+load("//rules:copy_from_zip.bzl", "copy_from_zip")
+
+copy_from_zip(
+    name = "codegen_unzip",
+    zip = "//problem/gen:gen_zip",
+    include_srcs = "cs",
+    out = "gen",
+    tags = ["local"],
+)
+
+csharp_binary(
+    name = "cs",
+    srcs = ["bfile.cs", ":codegen_unzip"],
+    visibility = ["//visibility:public"],
+    target_frameworks = ["net6.0"],
+    targeting_packs = [
+        "@paket.deps//microsoft.netcore.app.ref",
+    ],
+)

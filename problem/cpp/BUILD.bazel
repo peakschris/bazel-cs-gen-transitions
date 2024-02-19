@@ -1,0 +1,14 @@
+load("//rules:copy_from_zip.bzl", "copy_from_zip")
+
+copy_from_zip(
+    name = "codegen_unzip",
+    zip = "//problem/gen:gen_zip",
+    include_srcs = "cpp",
+    out = "gen",
+    tags = ["local"],
+)
+
+cc_binary(
+    name = "cpp",
+    srcs = ["bfile.cpp", ":codegen_unzip"],
+)

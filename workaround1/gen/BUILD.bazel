@@ -1,0 +1,12 @@
+load("custom_copy_file.bzl", custom_copy_file="copy_file")
+
+# Simulate a codegen by copying the zipfile from a different directory.
+# This output zip should ideally exist only once in bazel-out, rather
+# than multiple times in different configurations.
+custom_copy_file(
+	name = "gen_zip",
+	src = "//workaround1/gen_src:src.zip",
+	out = "gen.zip",
+	allow_symlink = True,
+	visibility = ["//visibility:public"],
+)
